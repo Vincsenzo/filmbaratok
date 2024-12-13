@@ -1,0 +1,25 @@
+{% load wagtailcore_tags navigation_tags %}
+
+<!-- Navbar -->
+<nav class="bg-gray-700 py-4">
+    {% get_site_root as site_root %}
+    <ul class="flex justify-center space-x-8">
+        <li>
+            <a href="{% pageurl site_root %}" class="text-white text-lg font-medium hover:text-red-400 border-b-2 border-transparent hover:border-red-500 transition">
+                {{ site_root.title }}
+            </a>
+        </li>
+        {% for menuitem in site_root.get_children.live.in_menu %}
+        <li>
+            <a href="{% pageurl menuitem %}" class="text-white text-lg font-medium hover:text-red-400 border-b-2 border-transparent hover:border-red-500 transition">
+                {{ menuitem.title }}
+            </a>
+        </li>
+        {% endfor %}
+        <li>
+            <a href="/search" class="text-white text-lg font-medium hover:text-red-400 border-b-2 border-transparent hover:border-red-500 transition">
+                Keresés
+            </a>
+        </li>
+    </ul>
+</nav>

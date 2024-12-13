@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}bg-gray-900 text-white{% endblock %}
+
+{% block content %}
+    {% include "includes/navbar.html" %}
+
+    <!-- Blog Posts Section -->
+    <main class="max-w-4xl mx-auto px-4 py-10">
+        <div class="space-y-6">
+            <!-- Blog Post Cards -->
+            {% for post in episode_pages %}
+                <!-- Episode Cards -->
+                <div class="bg-gray-800 p-5 flex items-stretch">
+                    <div class="flex-1 p-3">
+                        <a href="{% pageurl post %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ post.title }}</a>
+                        <p class="mt-2 text-white">{{ post.date }}</p>
+                        <p class="mt-4 text-gray-400">{{ post.intro }}</p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        {% image post.cover_image fill-500x500 class="h-28 w-28 object-cover" %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

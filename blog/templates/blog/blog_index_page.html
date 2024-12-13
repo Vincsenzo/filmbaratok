@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}bg-gray-900 text-white{% endblock %}
+
+{% block content %}
+    {% include "includes/navbar.html" %}
+
+    {# Uncomment if in use #}
+    {% comment %} <h1>{{ page.title }}</h1>
+    <div class="intro">{{ page.intro|richtext }}</div> {% endcomment %}
+
+    <!-- Blog Posts Section -->
+    <main class="max-w-4xl mx-auto px-4 py-10">
+        <div class="space-y-6">
+            <!-- Blog Post Cards -->
+            {% for post in blogpages %}
+                <div class="bg-gray-800 p-5">
+                    <div class="p-3">
+                        <a href="{% pageurl post %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ post.title }}</a>
+                        <p class="mt-2 text-white">{{post.date}}</p>
+                        <p class="mt-4 text-gray-400">
+                            {{ post.intro }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    {# Old code for refrence #}
+    {% comment %} {% for post in blogpages %}
+        {% with post=post.specific %}
+            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+
+            {% with post.main_image as main_image %}
+                {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
+            {% endwith %}
+
+            <p>{{ post.intro }}</p>
+            {{ post.body|richtext }}
+        {% endwith %}
+    {% endfor %} {% endcomment %}
+
+{% endblock %}

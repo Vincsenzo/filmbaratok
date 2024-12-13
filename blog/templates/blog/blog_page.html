@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}bg-gray-900 text-white{% endblock %}
+
+{% block content %}
+    {% include "includes/navbar.html" %}
+
+    <main class="max-w-4xl mx-auto px-4 py-10">
+        <!-- Blog Post Content -->
+        <article class="space-y-6">
+            <!-- Title -->
+            <h1 class="text-3xl font-bold text-red-500">{{ page.title }}</h1>
+            
+            <!-- Meta Information -->
+            <div class="text-gray-400">
+                <p>Publikálás dátuma: <span class="text-white">{{ page.date }}</span></p>
+                {% with authors=page.authors.all %}
+                    {% if authors %}
+                        {% for author in authors %}
+                            <p>Írta: <span class="text-white">{{author.name}}</span></p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <!-- Introduction -->
+            <p class="text-lg text-gray-400">{{ page.intro }}</p>
+            
+            <!-- Blog Post Content -->
+            <div class="text-gray-200 space-y-4">{{ page.body|richtext }}</div>
+        </article>
+    </main>
+
+    {# Old code for refrence #}
+    {%comment%}
+    
+    <h1>{{ page.title }}</h1>
+    <p class="meta">{{ page.date }}</p>
+
+    {% with authors=page.authors.all %}
+        {% if authors %}
+            <h3>Posted by:</h3>
+            <ul>
+                {% for author in authors %}
+                    <li style="display: inline">
+                        {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                        {{ author.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <div class="intro">{{ page.intro }}</div>
+
+    {{ page.body|richtext }}
+
+    {% for item in page.gallery_images.all %}
+        <div style="float: inline-start; margin: 10px">
+            {% image item.image fill-320x240 %}
+            <p>{{ item.caption }}</p>
+        </div>
+    {% endfor %}
+
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+
+    {% with tags=page.tags.all %}
+        {% if tags %}
+            <div class="tags">
+                <h3>Tags</h3>
+                {% for tag in tags %}
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {%endcomment%}
+
+{% endblock %}

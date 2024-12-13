@@ -1,0 +1,16 @@
+{% load wagtailcore_tags navigation_tags %}
+
+<!-- Navbar -->
+<header class="bg-gray-800">
+    {% get_site_root as site_root %}
+    <nav class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+        <a href="{% pageurl site_root %}" class="text-3xl font-bold text-red-500">Filmbarátok Podcast</a>
+        <ul class="flex space-x-8 text-lg">
+            <li><a href="{% pageurl site_root %}" class="hover:underline text-red-500">{{ site_root.title }}</a></li>
+            {% for menuitem in site_root.get_children.live.in_menu %}
+                <li><a href="{% pageurl menuitem %}" class="hover:underline text-red-500">{{ menuitem.title }}</a></li>
+            {% endfor %}
+            <li><a href="/search" class="hover:underline text-red-500">Keresés</a></li>
+        </ul>
+    </nav>
+</header>
