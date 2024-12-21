@@ -37,6 +37,7 @@
     font-size: 0.875rem;
     color: #cccccc;
     margin-bottom: 8px;
+    margin-top: 2px;
 }
 
 .episode-title {
@@ -78,7 +79,7 @@
     .thumbnail-image {
         width: 90%;
         height: auto;
-        margin: 10px;
+        margin: 13px;
         border-radius: 8px;
     }
 }
