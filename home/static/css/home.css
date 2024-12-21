@@ -61,7 +61,6 @@
     font-size: 0.875rem;
     color: #cccccc;
     margin-bottom: 8px;
-    margin-top: 2px;
 }
 
 .episode-title {
@@ -121,6 +120,9 @@
         height: auto;
         margin: 13px;
         border-radius: 8px;
+    }
+    .upload-date {
+        margin-top: 2px;
     }
 }
 
