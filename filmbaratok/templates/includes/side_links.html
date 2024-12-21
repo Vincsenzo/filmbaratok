@@ -1,0 +1,53 @@
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/side-links.css' %}">
+{% endblock %}
+
+<div class="flex-side">
+    <h2 class="links-title">{{ page.podcast_app_links }}</h2>
+    <div class="patreon-title">Támogass minket</div>
+    <a href="#">
+        <img class="patreon" src="{% static "logos/patreon-badge.png" %}" alt="">
+    </a>
+    <section class="links-section">
+        <div class="links-grid">
+            <a href="{{ settings.base.NavigationSettings.apple_podcast_url }}" target="blank_" class="link-card">
+                <img src="{% static "logos/apple-logo.png" %}" alt="Apple Podcasts" class="link-icon">
+                <span>Apple Podcasts</span>
+            </a>
+            <a href="{{ settings.base.NavigationSettings.spotify_url }}" target="blank_" class="link-card">
+                <img src="{% static "logos/spotify-logo.png" %}" alt="Spotify" class="link-icon">
+                <span>Spotify</span>
+            </a>
+            <a href="{{ settings.base.NavigationSettings.youtube_url }}" target="blank_" class="link-card">
+                <img src="{% static "logos/youtube-logo.png" %}" alt="YouTube" class="link-icon">
+                <span>YouTube</span>
+            </a>
+            <a href="{{ settings.base.NavigationSettings.sound_cloud_url }}" target="blank_" class="link-card">
+                <img src="{% static "logos/soundcloude-logo.png" %}" alt="SoundCloud" class="link-icon">
+                <span>Sound Cloud</span>
+            </a>
+            <a href="#" target="blank_" class="link-card">
+                <img src="{% static "logos/facebook-logo.png" %}" alt="Facebook" class="link-icon">
+                <span>Facebook</span>
+            </a>
+            <a href="#" target="blank_" class="link-card">
+                <img src="{% static "logos/twitter-logo.png" %}" alt="Twitter" class="link-icon">
+                <span>Twitter</span>
+            </a>
+            <a href="#" target="blank_" class="link-card">
+                <img src="{% static "logos/mp3-logo.png" %}" alt="Download MP3" class="link-icon">
+                <span>MP3 letöltés</span>
+            </a>
+            <a href="#" target="blank_" class="link-card">
+                <img src="{% static "logos/rss-logo.png" %}" alt="RSS Feed" class="link-icon">
+                <span>RSS Feed</span>
+            </a>
+            <a href="#" target="blank_" class="link-card">
+                <img src="{% static "logos/imdb-logo.png" %}" alt="IMDb" class="link-icon">
+                <span>IMDb</span>
+            </a>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,15 @@
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+{% endblock %}
+
+<div class="pagination">
+    <button class="pagination-button prev">← Előző</button>
+    <div class="pagination-numbers">
+        <button class="pagination-button active">1</button>
+        <button class="pagination-button">2</button>
+        <button class="pagination-button">3</button>
+    </div>
+    <button class="pagination-button next">Következő →</button>
+</div>

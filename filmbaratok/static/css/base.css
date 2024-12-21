@@ -1,0 +1,65 @@
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1a1a1a;
+    color: #f5f5f5;
+    height: 100vh;
+}
+
+/* Header */
+.header {
+    background-color: #2c2c2c;
+    padding: 20px;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 2.5rem;
+    color: #ff5252;
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.navbar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.navbar-link {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: #ff5555;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-text {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 0;
+}

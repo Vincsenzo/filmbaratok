@@ -1,68 +1,54 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}bg-gray-900 text-white font-sans{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block body_class %}body{% endblock %}
 
 {% block content %}
-    <!-- Header -->
-    <header class="text-center py-10 bg-gray-800">
-        <h1 class="text-4xl md:text-6xl font-bold text-red-500">Filmbarátok Podcast</h1>
-    </header>
-
-    {% include "includes/navbar_home.html" %}
-
-    <!-- Episodes Section -->
-    <section class="px-6 py-10">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            {% for episode in recent_episodes %}
-                <div class="bg-gray-800 p-6 flex items-center">
-                    <div class="flex-1">
-                        <a href="{% pageurl episode %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ episode.title }}</a>
-                        <p class="mt-4 text-gray-400">{{ episode.intro }}</p>
-                    </div>
-                    <div class="ml-6">
-                        {% image episode.cover_image fill-500x500 class="h-28 w-28 object-cover" %}
-                    </div>
+    {% include "includes/navbar.html" %}
+    <div class="flex-container">
+        <div class="flex-main">
+            <section class="episodes-section">
+                <h2 class="blog-title">Legújabb epizódok</h2>
+                <div class="episodes-grid">
+                    {% for episode in recent_episodes %}
+                        <div class="episode-card">
+                            <div class="episode-thumbnail">
+                                {% image episode.cover_image fill-500x500 class="thumbnail-image" %}
+                            </div>
+                            <div class="episode-content">
+                                <p class="upload-date">{{ episode.date }}</p>
+                                <a href="{% pageurl episode %}" class="episode-title">{{ episode.title }}</a>
+                                <p class="episode-description">{{ episode.intro }}.</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-
-        </div>
-        <div class="text-center mt-8">
-            <a href="{% pageurl episode_index %}" class="text-red-500 hover:text-red-400 text-lg font-medium">Összes rész megtekintése</a>
-        </div>
-    </section>
-
-    <!-- Links Section -->
-    <section class="py-10 px-4 bg-gray-800">
-        <h2 class="text-3xl font-bold text-center text-white">{{ page.podcast_app_links }}</h2>
-        <div class="grid grid-cols-2 md:flex md:justify-center gap-4 mt-8">
-            {% with youtube_url=settings.base.NavigationSettings.youtube_url spotify_url=settings.base.NavigationSettings.spotify_url sound_cloud_url=settings.base.NavigationSettings.sound_cloud_url apple_podcast_url=settings.base.NavigationSettings.apple_podcast_url %}
-                <a href="{{ youtube_url }}" target="blank_" class="bg-red-600 text-white px-4 py-2 rounded text-center hover:bg-red-500">YouTube</a>
-                <a href="{{ spotify_url }}" target="blank_" class="bg-green-500 text-white px-4 py-2 rounded text-center hover:bg-green-400">Spotify</a>
-                <a href="{{ apple_podcast_url }}" target="blank_" class="bg-purple-600 text-white px-4 py-2 rounded text-center hover:bg-purple-500">Apple Podcasts</a>
-                <a href="{{ sound_cloud_url }}" target="blank_" class="bg-orange-500 text-white px-4 py-2 rounded text-center hover:bg-orange-400">SoundCloud</a>
-            {% endwith %}
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="px-6 py-10">
-        <h2 class="text-3xl font-bold text-center text-white">{{ page.recent_blogs_title }}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-
-            {% for post in recent_blog_posts %}
-                <div class="bg-gray-800 p-6">
-                    <a href="{% pageurl post %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ post.title }}</a>
-                    <p class="mt-2 text-gray-400">{{ post.intro }}</p>
+                <div class="episodes-all">
+                    <a href="{% pageurl episode_index %}" class="episodes-all-link">Összes epizód</a>
                 </div>
-            {% endfor %}
+            </section>
 
+            <section class="blog-section">
+                <h2 class="blog-title">{{ page.recent_blogs_title }}</h2>
+                <div class="blogs-grid">
+                    {% for post in recent_blog_posts %}
+                        <div class="blog-card">
+                            <p class="blog-upload-date">{{ post.date }}</p>
+                            <a href="{% pageurl post %}" class="blog-link">{{ post.title }}</a>
+                            <p class="blog-description">{{ post.intro }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="blogs-all">
+                    <a href="{% pageurl blog_index %}" class="blogs-all-link">Összes poszt</a>
+                </div>
+            </section>
         </div>
-        <div class="text-center mt-8">
-            <a href="{% pageurl blog_index %}" class="text-red-500 hover:text-red-400 text-lg font-medium">Összes megtekintése</a>
-        </div>
-    </section>
+        {% include "includes/side_links.html" %}
+    </div>
+    {% include "includes/footer.html" %}
 {% endblock %}

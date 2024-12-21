@@ -19,6 +19,8 @@
                         {% with authors=page.authors.all %}
                             {% if authors %}
                                 {{ authors|join:", " }}
+                            {% elif page.authors_old %}
+                                {{ page.authors_old }}
                             {% endif %}
                         {% endwith %}
                     </span>

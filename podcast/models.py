@@ -24,6 +24,7 @@ class EpisodePage(Page):
     body = RichTextField(blank=True)
     duration = models.DurationField()
     authors = ParentalManyToManyField('blog.Author', blank=True)
+    authors_old = models.CharField(max_length=250, blank=True, null=True)
     cover_image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
     youtube_url = models.URLField(verbose_name="YouTube url", blank=True)

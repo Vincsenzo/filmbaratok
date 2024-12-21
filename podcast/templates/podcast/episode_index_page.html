@@ -1,29 +1,32 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}bg-gray-900 text-white{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/episodes.css' %}">
+{% endblock %}
+{% block body_class %}body{% endblock %}
 
 {% block content %}
     {% include "includes/navbar.html" %}
-
-    <!-- Blog Posts Section -->
-    <main class="max-w-4xl mx-auto px-4 py-10">
-        <div class="space-y-6">
-            <!-- Blog Post Cards -->
+    <div class="episodes-container">
+        <h2 class="episodes-title">Összes epizód</h2>
+        <div class="episodes-grid">
+            <!-- Episode Card -->
             {% for post in episode_pages %}
-                <!-- Episode Cards -->
-                <div class="bg-gray-800 p-5 flex items-stretch">
-                    <div class="flex-1 p-3">
-                        <a href="{% pageurl post %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ post.title }}</a>
-                        <p class="mt-2 text-white">{{ post.date }}</p>
-                        <p class="mt-4 text-gray-400">{{ post.intro }}</p>
+                <div class="episode-card">
+                    <div class="episode-thumbnail">
+                        {% image post.cover_image fill-500x500 class="thumbnail-image" %}
                     </div>
-                    <div class="flex-shrink-0">
-                        {% image post.cover_image fill-500x500 class="h-28 w-28 object-cover" %}
+                    <div class="episode-content">
+                        <p class="upload-date">{{ post.date }}</p>
+                        <a href="{% pageurl post %}" class="episode-title">{{ post.title }}</a>
+                        <p class="episode-description">{{ post.intro }}</p>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </main>
-{% endblock %}
+    </div>
+    {% include "includes/pagination.html" %}
+    {% include "includes/footer.html" %}
+{% endblock  %}
