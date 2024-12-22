@@ -14,7 +14,6 @@ from wagtail.search import index
 
 
 class BlogIndexPage(Page):
-    intro = RichTextField(blank=True)
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -23,10 +22,6 @@ class BlogIndexPage(Page):
         blogpages = BlogPage.objects.child_of(self).live().order_by('-date')
         context['blogpages'] = blogpages
         return context
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro')
-    ]
 
 
 class BlogPageTag(TaggedItemBase):

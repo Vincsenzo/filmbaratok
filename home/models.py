@@ -9,8 +9,6 @@ from podcast.models import EpisodeIndexPage, EpisodePage
 
 
 class HomePage(Page):
-    recent_blogs_title = models.CharField(max_length=250, blank=True)
-    podcast_app_links = models.CharField(max_length=250, blank=True)
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -31,8 +29,3 @@ class HomePage(Page):
         context['blog_index'] = blog_index
         context['episode_index'] = episode_index
         return context
-
-    content_panels = Page.content_panels + [
-        FieldPanel('recent_blogs_title'),
-        FieldPanel('podcast_app_links'),
-    ]
