@@ -1,67 +1,54 @@
 {% extends "base.html" %}
+{% load static %}
 {% load static wagtailcore_tags %}
 
-{% block body_class %}bg-gray-900 text-white{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+{% block body_class %}body{% endblock %}
 
 {% block title %}Search{% endblock %}
 
 {% block content %}
     {% include "includes/navbar.html" %}
 
-    <main class="max-w-4xl mx-auto px-4 py-7">
+    <main class="main-container">
         <!-- Search Form -->
-        <form action="{% url 'search' %}" method="get" class="mb-6 flex items-center">
+        <form action="{% url 'search' %}" method="get" class="search-form">
             <input 
                 type="text" 
                 name="query" 
                 {% if search_query %} value="{{ search_query }}"{% endif %} 
                 placeholder="pl.: Babe 2" 
-                class="flex-1 bg-gray-800 text-white px-4 py-2 focus:outline-none focus:ring focus:ring-red-500">
+                class="search-input">
             <input 
                 type="submit" 
                 value="Keresés" 
-                class="bg-red-600 text-white px-4 py-2 hover:bg-red-700 cursor-pointer">
+                class="search-button">
         </form>
 
         {% if search_results %}
             <!-- Search Results Info -->
-            <p class="text-gray-400 mb-4">
-                {% if search_query %} Rákerestél a <span class="text-white">“{{ search_query }}”</span> kifejezésre{% endif %}, 
+            <p class="search-results-info">
+                {% if search_query %} Rákerestél a <span class="highlight">“{{ search_query }}”</span> kifejezésre{% endif %}, 
                 {{ search_results.paginator.count }} találat.
             </p>
-
             <!-- Search Results List -->
-            <ul class="space-y-6">
+            <ul class="search-results-list">
                 {% for result in search_results %}
-                <li class="bg-gray-800 p-6">
+                <li class="search-result-item">
                     <h4>
-                        <a href="{% pageurl result %}" class="text-xl font-bold text-red-500 hover:text-red-400">{{ result }}</a>
+                        <a href="{% pageurl result %}" class="search-result-title">{{ result }}</a>
                     </h4>
                     {% if result.search_description %}
-                    <p class="text-gray-400 mt-2">{{ result.search_description }}</p>
+                    <p class="search-result-description">{{ result.search_description }}</p>
                     {% endif %}
                 </li>
                 {% endfor %}
             </ul>
-
-            <!-- Pagination -->
-            {% if search_results.paginator.num_pages > 1 %}
-            <div class="mt-6 flex justify-between items-center">
-                {% if search_results.has_previous %}
-                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}" 
-                class="text-red-500 hover:text-red-400">Previous</a>
-                {% endif %}
-                <p class="text-gray-400">
-                    Page {{ search_results.number }} of {{ search_results.paginator.num_pages }}
-                </p>
-                {% if search_results.has_next %}
-                <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}" 
-                class="text-red-500 hover:text-red-400">Next</a>
-                {% endif %}
-            </div>
-            {% endif %}
-            {% elif search_query %}
-            <p class="text-gray-400 mt-4">Nincs találat a <span class="text-white">“{{ search_query }}”</span> kifejezésre.</p>
+            {% include "includes/search-pagination.html" %}
+        {% elif search_query %}
+        <p class="search-results-info">Nincs találat a <span class="highlight">“{{ search_query }}”</span> kifejezésre.</p>
         {% endif %}
     </main>
 {% endblock %}

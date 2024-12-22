@@ -17,7 +17,7 @@
     border: 1px solid #373737;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
 }
 
 .pagination-button:hover {
