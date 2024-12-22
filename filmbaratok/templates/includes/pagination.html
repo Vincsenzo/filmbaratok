@@ -3,12 +3,25 @@
     <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
 {% endblock %}
 
-<div class="pagination">
-    <button class="pagination-button prev">← Előző</button>
-    <div class="pagination-numbers">
-        <button class="pagination-button active">1</button>
-        <button class="pagination-button">2</button>
-        <button class="pagination-button">3</button>
+<!-- Pagination -->
+{% if episode_pages.paginator.num_pages > 1 %}
+    <div class="pagination">
+        {% if episode_pages.has_previous %}
+            <a href="?page={{ episode_pages.previous_page_number }}" class="pagination-button prev">Előző</a>
+        {% endif %}
+
+        <div class="pagination-numbers">
+            {% for page_num in episode_pages.paginator.page_range %}
+                {% if page_num == episode_pages.number %}
+                    <span class="pagination-button active">{{ page_num }}</span>
+                {% else %}
+                    <a href="?page={{ page_num }}" class="pagination-button">{{ page_num }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {% if episode_pages.has_next %}
+            <a href="?page={{ episode_pages.next_page_number }}" class="pagination-button next">Következő </a>
+        {% endif %}
     </div>
-    <button class="pagination-button next">Következő →</button>
-</div>
+{% endif %}

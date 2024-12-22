@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from modelcluster.fields import ParentalManyToManyField
 
@@ -13,7 +14,17 @@ class EpisodeIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        episode_pages = EpisodePage.objects.child_of(self).live().order_by('-date')
+        episode_pages_all = EpisodePage.objects.child_of(self).live().order_by('-date')
+        paginator = Paginator(episode_pages_all, 12)
+
+        page = request.GET.get('page')
+        try:
+            episode_pages = paginator.page(page)
+        except PageNotAnInteger:
+            episode_pages = paginator.page(1)
+        except EmptyPage:
+            episode_pages = paginator.page(paginator.num_pages)
+
         context['episode_pages'] = episode_pages
         return context
 
