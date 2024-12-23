@@ -16,7 +16,9 @@
             {% for post in episode_pages %}
                 <div class="episode-card">
                     <div class="episode-thumbnail">
-                        {% image post.cover_image fill-500x500 class="thumbnail-image" %}
+                        <a href="{% pageurl post %}">
+                            {% image post.cover_image fill-500x500 class="thumbnail-image" %}
+                        </a>
                     </div>
                     <div class="episode-content">
                         <p class="upload-date">{{ post.date }}</p>
