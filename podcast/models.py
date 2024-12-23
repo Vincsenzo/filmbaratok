@@ -20,10 +20,13 @@ class EpisodeIndexPage(Page):
         page = request.GET.get('page')
         try:
             episode_pages = paginator.page(page)
+            episode_pages.adjusted_elided_pages = paginator.get_elided_page_range(page, on_each_side=1, on_ends=0)
         except PageNotAnInteger:
             episode_pages = paginator.page(1)
+            episode_pages.adjusted_elided_pages = paginator.get_elided_page_range(1, on_each_side=1, on_ends=0)
         except EmptyPage:
             episode_pages = paginator.page(paginator.num_pages)
+            episode_pages.adjusted_elided_pages = paginator.get_elided_page_range(paginator.num_pages, on_each_side=1, on_ends=0)
 
         context['episode_pages'] = episode_pages
         return context

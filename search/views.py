@@ -31,10 +31,13 @@ def search(request):
     paginator = Paginator(search_results, 10)
     try:
         search_results = paginator.page(page)
+        search_results.adjusted_elided_pages = paginator.get_elided_page_range(page, on_each_side=1, on_ends=0)
     except PageNotAnInteger:
         search_results = paginator.page(1)
+        search_results.adjusted_elided_pages = paginator.get_elided_page_range(1, on_each_side=1, on_ends=0)
     except EmptyPage:
         search_results = paginator.page(paginator.num_pages)
+        search_results.adjusted_elided_pages = paginator.get_elided_page_range(paginator.num_pages, on_each_side=1, on_ends=0)
 
     return TemplateResponse(
         request,

@@ -36,6 +36,15 @@ class Command(BaseCommand):
         with open(csv_file, 'r', encoding='utf-8') as file:
             reader = csv.DictReader(file)
 
+            # Saving the one repeating image outside of the loop
+            multy_image_url = "https://i1.sndcdn.com/artworks-000277146878-d4b788-t500x500.jpg"
+            multy_image_title = "Filmbaratok"
+            response = requests.get(multy_image_url)
+            image_data = BytesIO(response.content)
+            multy_wagtail_image = Image(title=multy_image_title)
+            multy_wagtail_image.file = InMemoryUploadedFile(image_data, None, multy_image_title + '.jpg', 'image/jpeg', len(response.content), None)
+            multy_wagtail_image.save()
+
             for row in reader:
                 duration = convert_time_string(row['Duration'])
 
@@ -45,12 +54,16 @@ class Command(BaseCommand):
                 image_url = row['Cover URL']
                 image_title = row['Title']
 
-                response = requests.get(image_url)
-                if response.status_code == 200:
-                    image_data = BytesIO(response.content)
-                    wagtail_image = Image(title=image_title)
-                    wagtail_image.file = InMemoryUploadedFile(image_data, None, image_title + '.jpg', 'image/jpeg', len(response.content), None)
-                    wagtail_image.save()
+                # Checking for repeating image
+                if image_url == multy_image_url:
+                    wagtail_image = multy_wagtail_image
+                else:
+                    response = requests.get(image_url)
+                    if response.status_code == 200:
+                        image_data = BytesIO(response.content)
+                        wagtail_image = Image(title=image_title)
+                        wagtail_image.file = InMemoryUploadedFile(image_data, None, image_title + '.jpg', 'image/jpeg', len(response.content), None)
+                        wagtail_image.save()
 
                 episode_page = EpisodePage(
                     title=row['Title'],

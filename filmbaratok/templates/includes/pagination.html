@@ -7,21 +7,25 @@
 {% if episode_pages.paginator.num_pages > 1 %}
     <div class="pagination">
         {% if episode_pages.has_previous %}
-            <a href="?page={{ episode_pages.previous_page_number }}" class="pagination-button prev">Előző</a>
+            <a href="?page=1" class="pagination-button prev"><<</a>
+            <a href="?page={{ episode_pages.previous_page_number }}" class="pagination-button"><</a>
         {% endif %}
 
         <div class="pagination-numbers">
-            {% for page_num in episode_pages.paginator.page_range %}
-                {% if page_num == episode_pages.number %}
-                    <span class="pagination-button active">{{ page_num }}</span>
+            {% for page_num in episode_pages.adjusted_elided_pages %}
+                {% if page_num == episode_pages.paginator.ELLIPSIS %}
+                    {% comment %} <span class="pagination-button">{{ page_num }}</span> {% endcomment %}
                 {% else %}
-                    <a href="?page={{ page_num }}" class="pagination-button">{{ page_num }}</a>
+                    <a href="?page={{ page_num }}" 
+                    class="pagination-button {% if page_num == episode_pages.number %}active{% endif %}"
+                    >{{ page_num }}</a>
                 {% endif %}
             {% endfor %}
         </div>
 
         {% if episode_pages.has_next %}
-            <a href="?page={{ episode_pages.next_page_number }}" class="pagination-button next">Következő </a>
+            <a href="?page={{ episode_pages.next_page_number }}" class="pagination-button">></a>
+            <a href="?page={{ episode_pages.paginator.num_pages }}" class="pagination-button next">>></a>
         {% endif %}
     </div>
 {% endif %}
