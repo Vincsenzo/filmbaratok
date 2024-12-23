@@ -1,21 +1,29 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% load wagtailcore_tags wagtailimages_tags %}
+{% load episode_extras %}
 
-{% block body_class %}bg-gray-900 text-white{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/single-episode.css' %}">
+{% endblock %}
+{% block body_class %}body{% endblock %}
 
 {% block content %}
     {% include "includes/navbar.html" %}
+    <main class="episode-container">
+        <div class="top-container">
+            <div class="episode-cover">
+                {% image page.cover_image original class="cover-image" %}
+            </div>
 
-    <!-- Single Episode Section -->
-    <main class="max-w-4xl mx-auto px-4 py-10">
-        <div class="flex flex-col md:flex-row items-stretch gap-6">
-            <!-- Text Content -->
-            <div class="flex-1 p-6 bg-gray-800">
-                <h2 class="text-2xl font-bold text-red-500">{{ page.title }}</h2>
-                <p class="mt-2 text-gray-400">Publikálás dátuma: <span class="text-white">{{ page.date }}</span></p>
-                <p class="mt-2 text-gray-400">
-                    Beszélgetnek: <span class="text-white">
+            <div class="meta-container">
+                <p class="episode-meta">
+                    <span class="meta-highlight">{{ page.date }}</span> • 
+                    <span class="meta-highlight">{{ page.duration|duration }}</span>
+                </p>
+                <h2 class="episode-title">{{ page.title }}</h2>
+                <p class="episode-authors">
+                    <span class="meta-highlight">
                         {% with authors=page.authors.all %}
                             {% if authors %}
                                 {{ authors|join:", " }}
@@ -25,30 +33,27 @@
                         {% endwith %}
                     </span>
                 </p>
-                <p class="mt-2 text-gray-400">Epizód hossza: <span class="text-white">{{ page.duration }}</span></p>
-                <p class="mt-6 text-gray-400">
-                    {{ page.body|richtext }}
-                </p>
-                <div class="mt-6 flex flex-wrap gap-4">
-                    {% if page.youtube_url %}
-                        <a href="{{ page.youtube_url }}" target="blank_" class="bg-red-600 text-white px-4 py-2 rounded text-center hover:bg-red-500">YouTube</a>
-                    {% endif %}
-                    {% if page.spotify_url %}
-                        <a href="{{ page.spotify_url }}" target="blank_" class="bg-green-500 text-white px-4 py-2 rounded text-center hover:bg-green-400">Spotify</a>
-                    {% endif %}
-                    {% if page.apple_podcast_url %}
-                        <a href="{{ page.apple_podcast_url }}" target="blank_" class="bg-purple-600 text-white px-4 py-2 rounded text-center hover:bg-purple-500">Apple Podcasts</a>
-                    {% endif %}
-                    {% if page.sound_cloud_url %}
-                        <a href="{{ page.sound_cloud_url }}" target="blank_" class="bg-orange-500 text-white px-4 py-2 rounded text-center hover:bg-orange-400">SoundCloud</a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- Cover Image -->
-            <div class="flex-shrink-0 bg-gray-800">
-                {% image page.cover_image original class="h-full w-auto object-cover" %}
             </div>
         </div>
+
+        <div class="episode-links">
+            {% if page.youtube_url %}
+                <a href="{{ page.youtube_url }}" target="_blank" class="link-button youtube">YouTube</a>
+            {% endif %}
+            {% if page.spotify_url %}
+                <a href="{{ page.spotify_url }}" target="_blank" class="link-button spotify">Spotify</a>
+            {% endif %}
+            {% if page.apple_podcast_url %}
+                <a href="{{ page.apple_podcast_url }}" target="_blank" class="link-button apple-podcasts">Apple Podcasts</a>
+            {% endif %}
+            {% if page.sound_cloud_url %}
+                <a href="{{ page.sound_cloud_url }}" target="_blank" class="link-button soundcloud">SoundCloud</a>
+            {% endif %}
+        </div>
+        <hr>
+        <div class="episode-body">
+            {{ page.body|richtext }}
+        </div>
     </main>
+    {% include "includes/footer.html" %}
 {% endblock %}
