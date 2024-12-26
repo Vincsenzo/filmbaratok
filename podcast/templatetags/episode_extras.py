@@ -8,4 +8,7 @@ def duration(td):
     hours = total_seconds // 3600
     minutes = (total_seconds % 3600) // 60
 
-    return '{} óra {} perc'.format(hours, minutes)
+    if hours > 0:
+        return '{} óra {} perc'.format(hours, minutes)
+    else:
+        return '{} perc'.format(minutes)

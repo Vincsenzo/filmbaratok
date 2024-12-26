@@ -104,6 +104,14 @@
     background-color: #cc5f00;
 }
 
+.link-button.direct-download {
+    background-color: #007bff;
+}
+
+.link-button.direct-download:hover {
+    background-color: #0056b3;
+}
+
 .episode-body {
     font-size: 1rem;
     color: #ccc;

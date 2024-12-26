@@ -17,7 +17,9 @@
                     {% for episode in recent_episodes %}
                         <div class="episode-card">
                             <div class="episode-thumbnail">
-                                {% image episode.cover_image fill-500x500 class="thumbnail-image" %}
+                                <a href="{% pageurl episode %}">
+                                    {% image episode.cover_image fill-500x500 class="thumbnail-image" %}
+                                </a>
                             </div>
                             <div class="episode-content">
                                 <p class="upload-date">{{ episode.date }}</p>

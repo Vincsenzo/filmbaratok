@@ -45,18 +45,21 @@ class EpisodePage(Page):
     spotify_url = models.URLField(verbose_name="Spotify url", blank=True)
     apple_podcast_url = models.URLField(verbose_name="Apple Podcast url", blank=True)
     sound_cloud_url = models.URLField(verbose_name="SoundCloud url", blank=True)
+    audio_direct_url = models.URLField(verbose_name="Audio direct url", blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
         index.FilterField('date'),
+        index.FilterField('authors_old'), # TODO: make author fields searchable for real
+        index.FilterField('authors'),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('intro'),
         FieldPanel('body'),
-        FieldPanel('duration', widget=forms.TextInput(attrs={'placeholder': 'HH:MM:SS'})), #TODO: make this work
+        FieldPanel('duration', widget=forms.TextInput(attrs={'placeholder': 'HH:MM:SS'})),
         FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
         FieldPanel('cover_image'),
         MultiFieldPanel([
@@ -64,5 +67,6 @@ class EpisodePage(Page):
             FieldPanel('spotify_url'),
             FieldPanel('apple_podcast_url'),
             FieldPanel('sound_cloud_url'),
+            FieldPanel('audio_direct_url'),
         ], heading="Episode links"),
     ]

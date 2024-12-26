@@ -1,4 +1,7 @@
 # TODOs:
-- pagination on episodes and blogs page
-- diplaying search results better diplayed
-- making album cover better displayed
+- favicon
+- redo navbar (also for mobile)
+- get all the links (spotify, apple podcast...)
+
+- promotion part filled with content automatically
+- make author fields searchable for real
