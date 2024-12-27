@@ -40,14 +40,14 @@
             {% if page.audio_direct_url %}
                 <a href="{{ page.audio_direct_url }}" class="link-button direct-download">Letöltő link</a>
             {% endif %}
-            {% if page.sound_cloud_url %}
-                <a href="{{ page.sound_cloud_url }}" target="_blank" class="link-button soundcloud">SoundCloud</a>
-            {% endif %}
             {% if page.youtube_url %}
                 <a href="{{ page.youtube_url }}" target="_blank" class="link-button youtube">YouTube</a>
             {% endif %}
             {% if page.spotify_url %}
                 <a href="{{ page.spotify_url }}" target="_blank" class="link-button spotify">Spotify</a>
+            {% endif %}
+            {% if page.sound_cloud_url %}
+                <a href="{{ page.sound_cloud_url }}" target="_blank" class="link-button soundcloud">SoundCloud</a>
             {% endif %}
             {% if page.apple_podcast_url %}
                 <a href="{{ page.apple_podcast_url }}" target="_blank" class="link-button apple-podcasts">Apple Podcasts</a>
