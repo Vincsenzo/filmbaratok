@@ -34,21 +34,24 @@
                 </div>
             </section>
 
-            <section class="blog-section">
-                <h2 class="blog-title">Legújabb blog bejegyzések</h2>
-                <div class="blogs-grid">
-                    {% for post in recent_blog_posts %}
-                        <div class="blog-card">
-                            <p class="blog-upload-date">{{ post.date }}</p>
-                            <a href="{% pageurl post %}" class="blog-link">{{ post.title }}</a>
-                            <p class="blog-description">{{ post.intro }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="blogs-all">
-                    <a href="{% pageurl blog_index %}" class="blogs-all-link">Összes poszt</a>
-                </div>
-            </section>
+            {% if recent_blog_posts %}
+                <section class="blog-section">
+                    <h2 class="blog-title">Legújabb blog bejegyzések</h2>
+                    <div class="blogs-grid">
+                        {% for post in recent_blog_posts %}
+                            <div class="blog-card">
+                                <p class="blog-upload-date">{{ post.date }}</p>
+                                <a href="{% pageurl post %}" class="blog-link">{{ post.title }}</a>
+                                <p class="blog-description">{{ post.intro }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="blogs-all">
+                        <a href="{% pageurl blog_index %}" class="blogs-all-link">Összes poszt</a>
+                    </div>
+                </section>
+            {% endif %}
+
         </div>
         {% include "includes/side_links.html" %}
     </div>

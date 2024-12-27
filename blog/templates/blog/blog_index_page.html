@@ -14,13 +14,17 @@
             <section class="blog-section">
                 <h2 class="blog-title">{{ page.title }}</h2>
                 <div class="blogs-grid">
-                    {% for post in blogpages %}
-                        <div class="blog-card">
-                            <p class="blog-upload-date">{{ post.date }}</p>
-                            <a href="{% pageurl post %}" class="blog-link">{{ post.title }}</a>
-                            <p class="blog-description">{{ post.intro }}</p>
-                        </div>
-                    {% endfor %}
+                    {% if blogpages %}
+                        {% for post in blogpages %}
+                            <div class="blog-card">
+                                <p class="blog-upload-date">{{ post.date }}</p>
+                                <a href="{% pageurl post %}" class="blog-link">{{ post.title }}</a>
+                                <p class="blog-description">{{ post.intro }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="blog-upload-date">Nincsenek posztok feltöltve</p>
+                    {% endif %}
                 </div>
             </section>
         </div>

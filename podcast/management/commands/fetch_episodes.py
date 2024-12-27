@@ -38,6 +38,12 @@ class Command(BaseCommand):
 
         for item in root.findall('./channel/item'):
             title = item.findtext('title')
+
+            # Check if an episode already exists
+            if EpisodePage.objects.filter(title=title).exists():
+                # self.stdout.write(f"Episode '{title}' already exists. Skipping.")
+                continue
+
             pub_date_raw = item.findtext('pubDate')
             pub_date = datetime.strptime(pub_date_raw, '%a, %d %b %Y %H:%M:%S %z').date()
             link = item.findtext('link')
@@ -45,11 +51,6 @@ class Command(BaseCommand):
             # description = item.findtext('description')
             audio_link = item.find('./enclosure').attrib.get('url') if item.find('./enclosure') is not None else None
             image_link = item.find('itunes:image', namespaces=namespaces).attrib.get('href') if item.find('itunes:image', namespaces=namespaces) is not None else None
-
-            # Check if an episode already exists
-            if EpisodePage.objects.filter(title=title).exists():
-                # self.stdout.write(f"Episode '{title}' already exists. Skipping.")
-                continue
 
             response_img = None
             wagtail_image = None
