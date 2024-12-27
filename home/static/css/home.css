@@ -114,28 +114,6 @@
     background: #ff5252;
 }
 
-@media (max-width: 768px) {
-    .thumbnail-image {
-        width: 90%;
-        height: auto;
-        margin: 13px;
-        border-radius: 8px;
-    }
-    .upload-date {
-        font-size: 0.75rem;
-        margin-top: 2px;
-        margin-bottom: 2px;
-    }
-    .episode-title {
-        font-size: 1rem;
-        margin: 4px 0 4px 0;
-    }
-    .episode-description {
-        font-size: 0.8rem;
-        margin: 0;
-    }
-}
-
 /* Blog Section */
 .blog-section {
     padding: 20px 20px;
@@ -203,4 +181,35 @@
     color: #ffffff;
     border-color: #ff5252;
     background: #ff5252;
+}
+
+@media (max-width: 768px) {
+    .flex-container {
+        margin: 5px auto;
+    }
+    .thumbnail-image {
+        width: 90%;
+        height: auto;
+        margin: 13px;
+        border-radius: 8px;
+    }
+    .upload-date {
+        font-size: 0.75rem;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .episode-title {
+        font-size: 1rem;
+        margin: 4px 0 4px 0;
+    }
+    .episode-description {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+    .episodes-all-link {
+        transition: none;
+    }
+    .blogs-all-link {
+        transition: none;
+    }
 }
