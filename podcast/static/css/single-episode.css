@@ -118,6 +118,7 @@
     margin-top: 20px;
     line-height: 1.6;
     text-align: left;
+    word-wrap: break-word;
 }
 
 @media (max-width: 768px) {
