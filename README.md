@@ -1,8 +1,11 @@
 # TODOs:
-- set gunicorn 3 workers and turn off other app
+- create robots.txt file and sitemap.xml (good example: https://www.rackhost.hu/robots.txt)
+- meta tags for google, facebook, and twitter
+- promotion part filled with content automatically (meta tags)
 - get all the links (spotify, apple podcast...)
-- 404 and 500 page design
+- get number of listens data from YT and other places (https://docs.google.com/forms/d/e/1FAIpQLSeBr4uNwJxhfOzmnGerU0LNq48IvsHkBNmYRKntOTDJ4Uycjg/viewanalytics)
+- get yt links for timestamps in description
+- custom 404, 500 and error pages
 - log search queries
 - make rss feed for website
-- promotion part filled with content automatically
 - make author fields searchable for real
